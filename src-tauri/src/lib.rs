@@ -2,6 +2,7 @@ use std::sync::Mutex;
 
 use tauri::Manager;
 
+const SPEED: u32 = 1;
 enum ElevatorState {
 	WAITING = 0,
 	UNLOADING = 1,
@@ -9,25 +10,33 @@ enum ElevatorState {
 	MOVING = 3,
 }
 
+struct Passager {
+	destination: u32,
+}
+
 struct BasicElevator {
+	position: u32,
 	step_queue: Vec<u32>,
+	passagers: Vec<Passager>,
 	state: ElevatorState,
 }
 
 impl Default for BasicElevator {
 	fn default() -> Self {
-		BasicElevator { step_queue: vec![], state: ElevatorState::WAITING }
+		BasicElevator { position: 0, step_queue: vec![], passagers: vec![], state: ElevatorState::WAITING }
 	}
 }
 
 struct SmartElevator {
+	position: u32,
 	step_queue: Vec<(u32, bool)>,
+	passagers: Vec<Passager>,
 	state: ElevatorState,
 }
 
 impl Default for SmartElevator {
 	fn default() -> Self {
-		SmartElevator { step_queue: vec![], state: ElevatorState::WAITING }
+		SmartElevator { position: 0, step_queue: vec![], passagers: vec![], state: ElevatorState::WAITING }
 	}
 }
 
@@ -75,31 +84,36 @@ async fn step(app: tauri::AppHandle) -> Result<(u32, u32), String> {
 	let smart_elevator = app.state::<Mutex<BasicElevator>>();
 	let mut smart_elevator = smart_elevator.lock().unwrap();
 
-	let basic_y_pos: u32;
-
 	match basic_elevator.state {
 		ElevatorState::WAITING => {
 			if basic_elevator.step_queue.len() > 0 {
 				basic_elevator.state = ElevatorState::MOVING;
 			}
-			basic_y_pos = basic_elevator.step_queue[0];
 		}
 		ElevatorState::UNLOADING => {
+			let mut i: usize = 0;
+			for passager in basic_elevator.passagers {
+				if passager.destination == basic_elevator.position {
+					basic_elevator.passagers.remove(i);
+				}
+				i += 1;
+			}
 			basic_elevator.state = ElevatorState::LOADING;
-			basic_y_pos = basic_elevator.step_queue[0];
 		}
 		ElevatorState::LOADING => {
 			basic_elevator.state = ElevatorState::WAITING;
-			basic_y_pos = basic_elevator.step_queue[0];
 		}
 		ElevatorState::MOVING => {
-			basic_elevator.state = ElevatorState::UNLOADING;
-			basic_elevator.step_queue.remove(0);
-			basic_y_pos = basic_elevator.step_queue[0];
+			if basic_elevator.position < basic_elevator.step_queue[0] { basic_elevator.position += SPEED; }
+			else if basic_elevator.position > basic_elevator.step_queue[0] { basic_elevator.position -= SPEED; }
+			else {
+				basic_elevator.state = ElevatorState::UNLOADING;
+				basic_elevator.step_queue.remove(0);
+			}
 		}
 	}
 
-	Ok((basic_y_pos, 0))
+	Ok((basic_elevator.position, 0))
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
