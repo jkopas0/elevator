@@ -1,20 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-labelledby="t d">
   <title id="t">Smart elevator</title>
   <desc id="d">A connected smart elevator with a Wi-Fi hub on top, an AI controller chip, and a presence sensor above doors that are opening.</desc>
-
-  <g transform="translate(20 0)">
-    <!-- Wi-Fi signal + hub -->
-    <g fill="none" stroke="#14B8A6" stroke-width="3.5" stroke-linecap="round">
-      <path d="M172.9 28.9 A10 10 0 0 1 187.1 28.9"/>
-      <path d="M167.3 23.3 A18 18 0 0 1 192.7 23.3"/>
-      <path d="M161.6 17.6 A26 26 0 0 1 198.4 17.6"/>
-    </g>
-    <circle cx="180" cy="36" r="3.5" fill="#14B8A6"/>
-    <rect x="150" y="40" width="60" height="20" rx="5" fill="#0F766E"/>
-    <circle cx="165" cy="50" r="3" fill="#99F6E4"/>
-    <circle cx="180" cy="50" r="3" fill="#99F6E4"/>
-    <circle cx="195" cy="50" r="3" fill="#99F6E4" opacity="0.5"/>
-
+  <g>
     <!-- shaft frame -->
     <rect x="70" y="60" width="220" height="300" rx="10" fill="#EEF1F5" stroke="#2B3A4A" stroke-width="6"/>
 

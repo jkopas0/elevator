@@ -6,10 +6,26 @@
 </script>
 
 <header>
-  <h1>The difference between a smart elevator and a normal elevator</h1>
+  <h1>Smart vs normal elevator</h1>
 </header>
 
 <main>
+  <div class="floors floors-left" id="floor1"></div>
+  <div class="floors floors-left" id="floor2"></div>
+  <div class="floors floors-left" id="floor3"></div>
+  <div class="floors floors-left" id="floor4"></div>
+  <div class="floors floors-left" id="floor5"></div>
+  <div class="floors floors-left" id="floor6"></div>
+  <div class="floors floors-left" id="floor7"></div>
+  <div class="floors floors-left" id="floor8"></div>
+  <div class="floors floors-right" id="floor1"></div>
+  <div class="floors floors-right" id="floor2"></div>
+  <div class="floors floors-right" id="floor3"></div>
+  <div class="floors floors-right" id="floor4"></div>
+  <div class="floors floors-right" id="floor5"></div>
+  <div class="floors floors-right" id="floor6"></div>
+  <div class="floors floors-right" id="floor7"></div>
+  <div class="floors floors-right" id="floor8"></div>
   <img src="/elevators/smart-elevator.svg" alt="smart elevator" id="smart-elevator">
   <img src="/elevators/normal-elevator.svg" alt="normal elevator" id="normal-elevator">
 </main>
@@ -26,7 +42,7 @@
 
   :root {
     font-family: 'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', sans-serif;
-    font-size: 16px;
+    font-size: 11px;
     line-height: 24px;
     font-weight: 400;
 
@@ -50,6 +66,12 @@
     box-sizing: border-box;
   }
 
+  main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
   header {
     padding: 1em;
     text-align: center;
@@ -59,35 +81,67 @@
     box-shadow: 0px 5px 5px var(--shadow-color);
   }
 
+  .floors {
+    position: absolute;
+    transform: translate(-50%);
+    background-color: var(--header-background);
+    width: 25vw;
+    height: 0.5vh;
+  }
+
+  .floors-left {
+    left: 25vw;
+  }
+
+  .floors-right {
+    left: 75vw;
+  }
+
+  #floor1 {
+    top: 95vh;
+  }
+
+  #floor2 {
+    top: 84vh;
+  }
+
+  #floor3 {
+    top: 73vh;
+  }
+
+  #floor4 {
+    top: 62vh;
+  }
+
+  #floor5 {
+    top: 51vh;
+  }
+
+  #floor6 {
+    top: 40vh;
+  }
+
+  #floor7 {
+    top: 29vh;
+  }
+
+  #floor8 {
+    top: 18vh;
+  }
+
   #smart-elevator {
     position: absolute;
-    top: 70%;
+    top: 6.5vh;
     left: 25%;
     transform: translate(-50%);
-    width: 12vw;
-    -webkit-filter: drop-shadow(0px 5px 5px var(--shadow-color));
-    filter: drop-shadow(0px 5px 5px var(--shadow-color));
+    height: 12.5vh;
   }
 
   #normal-elevator {
     position: absolute;
-    top: 70%;
+    top: 83.5vh;
     left: 75%;
     transform: translate(-50%);
-    width: 12vw;
-    -webkit-filter: drop-shadow(0px 5px 5px var(--shadow-color));
-    filter: drop-shadow(0px 5px 5px var(--shadow-color));
+    height: 12.5vh;
   }
-
-  @media (max-width: 1024px) {
-    #smart-elevator {
-      width: 40vw;
-    }
-
-    #normal-elevator {
-      width: 40vw;
-    }
-  }
-
-
 </style>
