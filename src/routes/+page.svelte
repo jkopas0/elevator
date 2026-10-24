@@ -26,6 +26,7 @@
   <div class="floors floors-right" id="floor6"></div>
   <div class="floors floors-right" id="floor7"></div>
   <div class="floors floors-right" id="floor8"></div>
+  <img src="/stick-figure.svg" alt="person" id="person">
   <img src="/elevators/smart-elevator.svg" alt="smart elevator" id="smart-elevator">
   <img src="/elevators/normal-elevator.svg" alt="normal elevator" id="normal-elevator">
 </main>
@@ -66,12 +67,6 @@
     box-sizing: border-box;
   }
 
-  main {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
   header {
     padding: 1em;
     text-align: center;
@@ -81,11 +76,17 @@
     box-shadow: 0px 5px 5px var(--shadow-color);
   }
 
+  main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
   .floors {
     position: absolute;
     transform: translate(-50%);
     background-color: var(--header-background);
-    width: 25vw;
+    width: 45vw;
     height: 0.5vh;
   }
 
@@ -131,7 +132,7 @@
 
   #smart-elevator {
     position: absolute;
-    top: 6.5vh;
+    top: 83.5vh;
     left: 25%;
     transform: translate(-50%);
     height: 12.5vh;
@@ -143,5 +144,13 @@
     left: 75%;
     transform: translate(-50%);
     height: 12.5vh;
+  }
+
+  #person {
+    position: absolute;
+    top: 85.5vh;
+    left: 8%;
+    transform: translate(-50%);
+    height: 10vh;
   }
 </style>

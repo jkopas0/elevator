@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" width="200" height="300" role="img" aria-label="Stick figure">
+  <g fill="none" stroke="#f6f6f6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- hlava -->
+    <circle cx="100" cy="50" r="30"/>
+    <!-- tělo -->
+    <line x1="100" y1="80" x2="100" y2="190"/>
+    <!-- ruce -->
+    <polyline points="40,140 100,105 160,140"/>
+    <!-- nohy -->
+    <polyline points="50,275 100,190 150,275"/>
+  </g>
+  <!-- obličej -->
+  <g fill="#f6f6f6">
+    <circle cx="90" cy="45" r="3.5"/>
+    <circle cx="110" cy="45" r="3.5"/>
+  </g>
+  <path d="M88 60 Q100 71 112 60" fill="none" stroke="#f6f6f6" stroke-width="4" stroke-linecap="round"/>
+</svg>
