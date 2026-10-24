@@ -5,15 +5,33 @@
   let smart_y_pos = $state(0);
 </script>
 
+<header>
+  <h1>The difference between a smart elevator and a normal elevator</h1>
+</header>
+
 <main>
-<h1>The difference between a smart elevator and a normal elevator</h1>
-<div id="elevator-smart"></div>
-<div id="elevator-normal"></div>
+<img src="/smart-elevator.svg" alt="smart elevator" id="smart-elevator">
+<img src="/normal-elevator.svg" alt="normal elevator" id="normal-elevator">
 </main>
 
 <style>
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/BricolageGrotesque-Variable.woff2') format('woff2');
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -28,23 +46,42 @@
   -webkit-text-size-adjust: 100%;
 }
 
-#elevator-smart {
-  position: absolute;
-  top: 75%;
-  left: 25%;
-  transform: translate(-50%);
-  width: 10em;
-  height: 10em;
-  background-color: #AAA;
+header {
+  background-color: #434343;
+  border-radius: 10px;
+  padding: 1em;
+  border: 1px solid #4f4f4f;
+  box-shadow: 0px 5px 5px #1f1f1f;
+  text-align: center;
 }
 
-#elevator-normal {
+#smart-elevator {
   position: absolute;
-  top: 75%;
+  top: 70%;
+  left: 25%;
+  transform: translate(-50%);
+  width: 12vw;
+  -webkit-filter: drop-shadow(0px 5px 5px #1f1f1f);
+  filter: drop-shadow(0px 5px 5px #1f1f1f);
+}
+
+#normal-elevator {
+  position: absolute;
+  top: 70%;
   left: 75%;
   transform: translate(-50%);
-  width: 10em;
-  height: 10em;
-  background-color: #AAA;
+  width: 12vw;
+  -webkit-filter: drop-shadow(0px 5px 5px #1f1f1f);
+  filter: drop-shadow(0px 5px 5px #1f1f1f);
+}
+
+@media (max-width: 768px) {
+  #smart-elevator {
+    width: 40vw;
+  }
+
+  #normal-elevator {
+    width: 40vw;
+  }
 }
 </style>

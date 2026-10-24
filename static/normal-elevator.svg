@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-labelledby="t d">
+  <title id="t">Normal elevator</title>
+  <desc id="d">A conventional elevator with closed doors and a floor indicator above them.</desc>
+
+  <g transform="translate(20 0)">
+    <!-- motor housing + pulley -->
+    <rect x="130" y="36" width="100" height="24" rx="5" fill="#2B3A4A"/>
+    <circle cx="180" cy="48" r="7" fill="#EEF1F5"/>
+    <circle cx="180" cy="48" r="2.5" fill="#2B3A4A"/>
+
+    <!-- shaft frame -->
+    <rect x="70" y="60" width="220" height="300" rx="10" fill="#EEF1F5" stroke="#2B3A4A" stroke-width="6"/>
+
+    <!-- floor indicator -->
+    <rect x="130" y="76" width="100" height="34" rx="6" fill="#1F2933"/>
+    <path d="M170 99 L180 83 L190 99 Z" fill="#F5A623"/>
+
+    <!-- door opening -->
+    <rect x="95" y="125" width="170" height="220" fill="#9AA8B6"/>
+
+    <!-- closed doors -->
+    <g stroke="#2B3A4A" stroke-width="3" fill="#D5DCE4">
+      <rect x="95" y="125" width="85" height="220"/>
+      <rect x="180" y="125" width="85" height="220"/>
+    </g>
+    <!-- brushed-metal lines -->
+    <g stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.7">
+      <line x1="112" y1="140" x2="112" y2="330"/>
+      <line x1="128" y1="140" x2="128" y2="330" opacity="0.5"/>
+      <line x1="248" y1="140" x2="248" y2="330"/>
+      <line x1="232" y1="140" x2="232" y2="330" opacity="0.5"/>
+    </g>
+  </g>
+</svg>
