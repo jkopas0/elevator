@@ -63,24 +63,6 @@ Nebo nainstaluj celé [Visual Studio Community](https://visualstudio.microsoft.c
 
 ---
 
-## Spuštění projektu
-
-### 1. Nainstaluj závislosti
-
-```powershell
-pnpm install
-```
-
-### 2. Spusť vývojový režim
-
-```powershell
-pnpm tauri dev
-```
-
-Příkaz zkompiluje backend (Rust) a spustí frontendový dev server. Při první kompilaci Rustu může spuštění trvat déle (několik minut).
-
----
-
 ## Konfigurace simulace
 
 Simulace načítá scénář ze souboru **`data/test.json`**. Tento soubor je nutné před spuštěním vytvořit nebo upravit.
@@ -112,6 +94,24 @@ Simulace načítá scénář ze souboru **`data/test.json`**. Tento soubor je nu
 | `people[].t` | Čas příchodu osoby (v sekundách) |
 | `people[].from` | Patro, kde osoba nastupuje |
 | `people[].to` | Patro, kam osoba jede |
+
+---
+
+## Spuštění projektu
+
+### 1. Nainstaluj závislosti
+
+```powershell
+pnpm install
+```
+
+### 2. Spusť vývojový režim
+
+```powershell
+pnpm tauri dev
+```
+
+Příkaz zkompiluje backend (Rust) a spustí frontendový dev server. Při první kompilaci Rustu může spuštění trvat déle (několik minut).
 
 ---
 
