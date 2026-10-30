@@ -1,12 +1,49 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/core";
+  import { listen } from "@tauri-apps/api/event";
+
+  type StepInfo = {
+    position: number;
+    floors: number[];
+    inside: number;
+    distance_travelled: number;
+  };
 
   let basic_y_pos = $state(0);
   let smart_y_pos = $state(0);
+  let basic_floors = $state<number[]>([]);
+  let smart_floors = $state<number[]>([]);
+  let basic_inside = $state(0);
+  let smart_inside = $state(0);
+  let basic_distance = $state(0);
+  let smart_distance = $state(0);
+
+  $effect(() => {
+    const unlisten = listen<[StepInfo, StepInfo]>("step", (event) => {
+      const [basic, smart] = event.payload;
+      basic_y_pos = basic.position;
+      smart_y_pos = smart.position;
+      basic_floors = basic.floors;
+      smart_floors = smart.floors;
+      basic_inside = basic.inside;
+      smart_inside = smart.inside;
+      basic_distance = basic.distance_travelled;
+      smart_distance = smart.distance_travelled;
+    });
+    return () => {
+      unlisten.then((f) => f());
+    };
+  });
+
+  invoke("load", { path: "../data/test.json" }).catch(console.error);
 </script>
 
 <header>
   <h1>Smart vs normal elevator</h1>
+  <div class="stats">
+    <span>Smart: {smart_distance} floors travelled</span>
+    <span>Normal: {basic_distance} floors travelled</span>
+  </div>
 </header>
 
 <main>
@@ -26,9 +63,26 @@
   <div class="floors floors-right" id="floor6"></div>
   <div class="floors floors-right" id="floor7"></div>
   <div class="floors floors-right" id="floor8"></div>
-  <img src="/stick-figure.svg" alt="person" id="person">
-  <img src="/elevators/smart-elevator.svg" alt="smart elevator" id="smart-elevator">
-  <img src="/elevators/normal-elevator.svg" alt="normal elevator" id="normal-elevator">
+  {#each smart_floors as count, floor}
+    {#if count > 0}
+      <div class="waiting waiting-left" style:top="{85.5 - 11 * floor}vh">
+        <img src="/stick-figure.svg" alt="person">
+        <span class="count">{count}</span>
+      </div>
+    {/if}
+  {/each}
+  {#each basic_floors as count, floor}
+    {#if count > 0}
+      <div class="waiting waiting-right" style:top="{85.5 - 11 * floor}vh">
+        <img src="/stick-figure.svg" alt="person">
+        <span class="count">{count}</span>
+      </div>
+    {/if}
+  {/each}
+  <img src="/elevators/smart-elevator.svg" alt="smart elevator" id="smart-elevator" style:top="{83.5 - 11 * smart_y_pos}vh">
+  <span class="count inside inside-left" style:top="{87 - 11 * smart_y_pos}vh">{smart_inside}</span>
+  <img src="/elevators/normal-elevator.svg" alt="normal elevator" id="normal-elevator" style:top="{83.5 - 11 * basic_y_pos}vh">
+  <span class="count inside inside-right" style:top="{87 - 11 * basic_y_pos}vh">{basic_inside}</span>
 </main>
 
 <style>
@@ -146,11 +200,45 @@
     height: 12.5vh;
   }
 
-  #person {
+  .waiting {
     position: absolute;
-    top: 85.5vh;
-    left: 8%;
+    display: flex;
+    align-items: center;
     transform: translate(-50%);
     height: 10vh;
+  }
+
+  .waiting img {
+    height: 100%;
+  }
+
+  .waiting-left {
+    left: 8%;
+  }
+
+  .waiting-right {
+    left: 58%;
+  }
+
+  .count {
+    font-size: 2.5em;
+    font-weight: 700;
+  }
+
+  .stats {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .inside {
+    position: absolute;
+  }
+
+  .inside-left {
+    left: 31%;
+  }
+
+  .inside-right {
+    left: 81%;
   }
 </style>
