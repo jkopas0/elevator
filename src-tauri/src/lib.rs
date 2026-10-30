@@ -4,7 +4,7 @@ use std::time::{Duration, Instant};
 
 use tauri::{Emitter, Manager};
 
-const SPEED: u32 = 1;
+const SPEED: u32 = 50;
 static TIME: AtomicU32 = AtomicU32::new(0);
 
 #[derive(Clone, Default)]
