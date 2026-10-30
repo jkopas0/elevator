@@ -44,15 +44,11 @@ Před spuštěním projektu je nutné mít nainstalované následující nástro
   cargo --version
   ```
 
-### 3. Tauri CLI (součást devDependencies)
-
-Tauri CLI je zahrnut jako vývojová závislost v `package.json` — není potřeba instalovat globálně.
-
-### 4. WebView2 (Windows)
+### 3. WebView2 (Windows)
 
 Na Windows musí být nainstalovaný **Microsoft Edge WebView2 Runtime**. Na většině systémů s Windows 10/11 je již přítomen. Pokud ne, stáhni ho z [webu Microsoftu](https://developer.microsoft.com/en-us/microsoft-edge/webview2/).
 
-### 5. Visual Studio Build Tools
+### 4. Visual Studio Build Tools
 
 Rust na Windows vyžaduje C++ build tools. **rustup je při instalaci automaticky nabídne nainstalovat** — stačí v průvodci zvolit možnost instalace Visual Studio Build Tools a pokračovat podle pokynů.
 
