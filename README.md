@@ -53,7 +53,7 @@ Na Windows musí být nainstalovaný **Microsoft Edge WebView2 Runtime**. Na vě
 Rust na Windows vyžaduje C++ build tools. **rustup je při instalaci automaticky nabídne nainstalovat** — stačí v průvodci zvolit možnost instalace Visual Studio Build Tools a pokračovat podle pokynů.
 
 Pokud je potřeba nainstalovat je ručně, stáhni [**Visual Studio Build Tools**](https://visualstudio.microsoft.com/cs/visual-cpp-build-tools/) a při instalaci zaškrtni:
-- ✅ *Desktop development with C++*
+- *Desktop development with C++*
 
 Nebo nainstaluj celé [Visual Studio Community](https://visualstudio.microsoft.com/cs/vs/community/).
 
