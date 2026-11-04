@@ -1,11 +1,12 @@
 use std::sync::Mutex;
-use std::sync::atomic::{AtomicU32, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU32, Ordering};
 use std::time::{Duration, Instant};
 
 use tauri::{Emitter, Manager};
 
-const SPEED: u32 = 50;
+const SPEED: u32 = 1;
 static TIME: AtomicU32 = AtomicU32::new(0);
+static RUNNING: AtomicBool = AtomicBool::new(false);
 
 #[derive(Clone, Default)]
 enum ElevatorState {
@@ -255,20 +256,43 @@ fn step(app: &tauri::AppHandle) -> (StepInfo, StepInfo) {
 	(basic_elevator.elevator.info(), smart_elevator.elevator.info())
 }
 
+fn is_done(app: &tauri::AppHandle) -> bool {
+	let basic_elevator = app.state::<Mutex<BasicElevator>>();
+	let basic_elevator = basic_elevator.lock().unwrap();
+	let smart_elevator = app.state::<Mutex<SmartElevator>>();
+	let smart_elevator = smart_elevator.lock().unwrap();
+
+	let basic = &basic_elevator.elevator;
+	let smart = &smart_elevator.elevator;
+
+	basic.queue.is_empty()
+		&& basic.waiting.is_empty()
+		&& basic.passagers.is_empty()
+		&& smart.queue.is_empty()
+		&& smart.waiting.is_empty()
+		&& smart.passagers.is_empty()
+}
+
 fn step_loop(app: tauri::AppHandle) {
 	let interval = Duration::from_millis(SPEED as u64);
 	let mut next = Instant::now() + interval;
 	loop {
 		std::thread::sleep(next.saturating_duration_since(Instant::now()));
 		next += interval;
+		if !RUNNING.load(Ordering::Relaxed) {
+			continue;
+		}
 		let info = step(&app);
 		let _ = app.emit("step", info);
+		if is_done(&app) {
+			RUNNING.store(false, Ordering::Relaxed);
+			let _ = app.emit("done", ());
+		}
 	}
 }
 
 #[tauri::command]
-async fn load(app: tauri::AppHandle, path: String) -> Result<(), String> {
-	let json = std::fs::read_to_string(&path).map_err(|e| e.to_string())?;
+async fn load(app: tauri::AppHandle, json: String) -> Result<(), String> {
 	let mut data: Data = serde_json::from_str(&json).map_err(|e| e.to_string())?;
 	data.people.sort_by_key(|p| p.time);
 	data.elevator.position = data.elevator.start_floor;
@@ -279,6 +303,7 @@ async fn load(app: tauri::AppHandle, path: String) -> Result<(), String> {
 	let smart_elevator = app.state::<Mutex<SmartElevator>>();
 	*smart_elevator.lock().unwrap() = SmartElevator { elevator: data.elevator, ..Default::default() };
 	TIME.store(0, Ordering::Relaxed);
+	RUNNING.store(true, Ordering::Relaxed);
 
 	Ok(())
 }
