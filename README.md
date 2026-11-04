@@ -10,7 +10,7 @@ Elevator Simulator je nástroj pro vizuální srovnání efektivity dvou různý
 
 ### Jak aplikace funguje
 
-Po načtení konfiguračního souboru (`data/test.json`) se spustí souběžně dvě simulace výtahu na stejném scénáři:
+Po přetažení konfiguračního JSON souboru do okna aplikace se spustí souběžně dvě simulace výtahu na stejném scénáři:
 
 | Algoritmus | Popis |
 |---|---|
@@ -61,9 +61,9 @@ Nebo nainstaluj celé [Visual Studio Community](https://visualstudio.microsoft.c
 
 ## Konfigurace simulace
 
-Simulace načítá scénář ze souboru **`data/test.json`**. Tento soubor je nutné před spuštěním vytvořit nebo upravit.
+Simulace načítá scénář z JSON souboru, který **přetáhnete do okna aplikace** (nebo vyberete tlačítkem). Po skončení simulace lze přetáhnout další soubor a spustit novou simulaci.
 
-### Formát souboru `data/test.json`
+### Formát JSON souboru
 
 ```json
 {
