@@ -133,6 +133,7 @@ Hodnota `SPEED` udává počet **milisekund** simulačního času, které uplyno
 |---|---|
 | **Ladislav Jaromír Pleštil** | Frontend (SvelteKit, vizualizace) |
 | **Jakub Kopas** | Backend (Rust, simulační logika) |
+| **Jiří Fuxa** | Design frontendu |
 
 ---
 
